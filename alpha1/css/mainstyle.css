@@ -734,6 +734,18 @@ h3, h4
 	font-size:50%
 	
 }
+#contextbar
+{
+	position: absolute;
+	width:520px;
+	/*height:50px;*/
+	background-color: #222;
+	display: inline;
+	z-index:2000;
+	-webkit-box-shadow: 2px 1px 1px 1px rgba(150, 150, 150, 0.5);
+	-moz-box-shadow: 2px 1px 1px 1px rgba(150, 150, 150, 0.5);
+	box-shadow: 2px 1px 1px 1px rgba(150, 150, 150, 0.5);
+}
 ::-webkit-scrollbar {
     width: 7px;
 }

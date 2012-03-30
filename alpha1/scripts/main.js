@@ -189,6 +189,7 @@ function onDocMouseUp(event)
 		editedobjectx = x;
 		resetEditedObject();
 		editorvisible = false;
+
 	}
 }
 function getOrchestrationData()
@@ -508,9 +509,13 @@ function onSlideMouseUp(event)
 		   }
 	}
 	*/
+
+
 	var target = (event.target.id).split("____slide");
+	console.log("Mouse uping "+event.target.id);
 	if(target.length > 1)
 	{
+		$("#contextbar").css("visibility", "hidden");
 		$(editedobject).removeClass("itemselected");
 		itemSelected = false;
 		$("#deleteBtn").css("opacity", 0);
@@ -541,6 +546,7 @@ function doObjectSelection(event)
 	//event.preventDefault();
 	toggleToolbarControls(true);
 	$("#deleteBtn").css("opacity", 0)
+	$("#contextbar").css("visibility", "visible");
 
 	if("#"+event.target.id != editedobject)
 	{
@@ -551,6 +557,12 @@ function doObjectSelection(event)
 			//hideEditorBox();
 	}
 	editedobject = "#"+event.target.id;
+	var x = parseInt($(editedobject).css("left").split("px")[0]);
+	var y = parseInt($(editedobject).css("top").split("px")[0]);
+	console.log(x+"     --   "+y)
+	var h = parseInt($(editedobject).css("height").split("px")[0])
+	$("#contextbar").css("left", x - 5)
+	$("#contextbar").css("top", (y+h)+10);
 
 	if(!itemSelected)
 	{
@@ -665,12 +677,14 @@ function onObjectDrag(event)
 	{
 		item.css("top", 20)
 	}
+	$("#contextbar").css("visibility", "hidden");
 }
 function onMouseUp(event)
 {
 	var item = $("#"+event.target.id)
-	var l = item.css("left").split("px")[0];
-	var t = item.css("top").split("px")[0];
+	var l = parseInt(item.css("left").split("px")[0]);
+	var t = parseInt(item.css("top").split("px")[0]);
+	var h = parseInt(item.css("height").split("px")[0]);
 	if(l < 0)
 	{
 		item.css("left", 20)
@@ -687,7 +701,10 @@ function onMouseUp(event)
 	{
 		item.css("left", 600)
 	}
-	positionDeleteButton()
+	$("#contextbar").css("visibility", "visible");
+	$("#contextbar").css("left", l - 5);
+	$("#contextbar").css("top", (t+h)+10);
+	positionDeleteButton();
 }
 function onThumbnailClick(event)
 {
